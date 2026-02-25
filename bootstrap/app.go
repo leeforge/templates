@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 	"go.uber.org/zap"
 
 	core "github.com/leeforge/core"
@@ -15,7 +15,7 @@ import (
 )
 
 type App struct {
-	engine *gin.Engine
+	echo   *echo.Echo
 	logger *zap.Logger
 	rt     core.Runtime
 }
@@ -37,8 +37,8 @@ func NewAppForTest() (*App, error) {
 	})
 }
 
-func (a *App) Engine() *gin.Engine {
-	return a.engine
+func (a *App) Echo() *echo.Echo {
+	return a.echo
 }
 
 func newApp(logger *zap.Logger, opts core.RuntimeOptions) (*App, error) {
@@ -52,16 +52,16 @@ func newApp(logger *zap.Logger, opts core.RuntimeOptions) (*App, error) {
 	}
 
 	return &App{
-		engine: buildGinEngine(rt),
+		echo:   buildEcho(rt),
 		logger: logger,
 		rt:     rt,
 	}, nil
 }
 
-func buildGinEngine(rt core.Runtime) *gin.Engine {
-	engine := gin.Default()
-	engine.Any("/*any", gin.WrapH(rt.Handler()))
-	return engine
+func buildEcho(rt core.Runtime) *echo.Echo {
+	e := echo.New()
+	e.Any("/*", echo.WrapHandler(rt.Handler()))
+	return e
 }
 
 func resolveConfigPath() string {

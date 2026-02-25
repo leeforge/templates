@@ -1,15 +1,15 @@
-# Leeforge Example Template (Gin)
+# Leeforge Example Template (Echo)
 
-A template project demonstrating how to build a service host using [Leeforge Core](https://github.com/leeforge/core) with the **Gin** HTTP framework.
+A template project demonstrating how to build a service host using [Leeforge Core](https://github.com/leeforge/core) with the **Echo** HTTP framework.
 
-> Looking for Echo? Switch to the [`echo`](https://github.com/leeforge/templates/tree/echo) branch.
+> Looking for Gin? Switch to the [`main`](https://github.com/leeforge/templates/tree/main) branch.
 
 ## Architecture
 
 ```
-cmd/server/main.go          # Entry point (Gin server)
+cmd/server/main.go          # Entry point (Echo server)
 bootstrap/
-  app.go                    # Gin adapter wrapping core runtime
+  app.go                    # Echo adapter wrapping core runtime
   plugin_registrar.go       # Plugin registration (Tenant, OU)
 config/config.go            # Configuration structures
 configs/*.yaml              # YAML configuration files
@@ -27,8 +27,8 @@ docker/                     # Docker & Compose files
 
 1. `bootstrap.NewApp()` creates a `core.Runtime` with config, plugins, and modules
 2. Core runtime bootstraps all modules/plugins using an internal Chi router
-3. `buildGinEngine()` wraps the Chi router handler via `gin.WrapH()`
-4. Gin engine starts and serves all requests through the core routing layer
+3. `buildEcho()` wraps the Chi router handler via `echo.WrapHandler()`
+4. Echo instance starts and serves all requests through the core routing layer
 
 ## Quick Start
 

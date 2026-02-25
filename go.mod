@@ -4,9 +4,9 @@ go 1.25.5
 
 require (
 	entgo.io/ent v0.14.5
-	github.com/gin-gonic/gin v1.11.0
 	github.com/go-chi/chi/v5 v5.2.3
 	github.com/google/uuid v1.6.0
+	github.com/labstack/echo/v4 v4.13.4
 	github.com/leeforge/core v0.1.1-0.20260224214832.1611c6f6
 	github.com/leeforge/framework v0.1.1-0.20260224160612.a5290fe
 	github.com/leeforge/plugins/ou v0.0.0-00010101000000-000000000000

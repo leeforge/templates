@@ -55,7 +55,7 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	if err := app.Engine().Run(":" + port); err != nil {
+	if err := app.Echo().Start(":" + port); err != nil {
 		log.Fatalf("run server: %v", err)
 	}
 }

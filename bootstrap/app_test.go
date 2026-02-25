@@ -5,40 +5,36 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/require"
 )
 
-func TestBootstrap_GinRegisterAllAndPlugins(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+func TestBootstrap_EchoRegisterAllAndPlugins(t *testing.T) {
 	app, err := NewAppForTest()
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet, "/api/v1/health", nil)
 	w := httptest.NewRecorder()
-	app.Engine().ServeHTTP(w, req)
+	app.Echo().ServeHTTP(w, req)
 	require.Equal(t, http.StatusOK, w.Code)
 }
 
-func TestBootstrap_GinSwaggerRoute(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+func TestBootstrap_EchoSwaggerRoute(t *testing.T) {
 	app, err := NewAppForTest()
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet, "/swagger/index.html", nil)
 	w := httptest.NewRecorder()
-	app.Engine().ServeHTTP(w, req)
+	app.Echo().ServeHTTP(w, req)
 	require.Equal(t, http.StatusOK, w.Code)
 }
 
-func TestBootstrap_GinSwaggerDocRoute(t *testing.T) {
-	gin.SetMode(gin.TestMode)
+func TestBootstrap_EchoSwaggerDocRoute(t *testing.T) {
 	app, err := NewAppForTest()
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet, "/swagger/doc.json", nil)
 	w := httptest.NewRecorder()
-	app.Engine().ServeHTTP(w, req)
+	app.Echo().ServeHTTP(w, req)
 	require.Equal(t, http.StatusOK, w.Code)
 	require.Contains(t, w.Body.String(), `"swagger": "2.0"`)
 	for _, route := range []string{
