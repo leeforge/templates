@@ -1,0 +1,12 @@
+captcha:
+  enabled: false
+  ttl: 5m
+  generate_limit: 10
+  generate_window: 1m
+  max_attempts: 5
+  attempt_window: 5m
+  math:
+    width: 240
+    height: 80
+    noise_count: 5
+    show_line_options: 2

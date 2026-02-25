@@ -1,0 +1,12 @@
+security:
+  jwt_secret: "your-secret-key-change-in-production"
+  token_expiry: 24
+  refresh_expiry: 72
+  password_cost: 12
+  enable_rate_limit: true
+  rate_limit: 60
+  cookie:
+    secure: false
+    same_site: "lax"
+    domain: ""
+    path: "/api/v1/auth"

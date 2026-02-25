@@ -1,0 +1,19 @@
+access_control:
+  multi_tenancy:
+    enabled: true
+    default_tenant_id: ""
+  project:
+    enabled: true
+    default_project_id: ""
+    require_project: false
+  domain:
+    mode: "domain"
+    default_domain_id: ""
+  abac:
+    enabled: false
+  share:
+    enabled: false
+  quota:
+    enabled: false
+  audit:
+    enabled: false

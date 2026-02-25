@@ -1,0 +1,36 @@
+services:
+  leeforge-examples:
+    image: 192.168.31.88:5000/leeforge-examples:latest
+    container_name: leeforge-examples
+    restart: unless-stopped
+    ports:
+      - "8091:8080"
+    env_file:
+      - ./env/.env
+      - ./env/leeforge_examples.env
+    environment:
+      - ENV_MODE=test
+      - LEEFORGE_CACHE_HOST=redis
+      - LEEFORGE_CACHE_PORT=6379
+      - LEEFORGE_DATABASE_HOST=pgsql
+      - LEEFORGE_DATABASE_PORT=5432
+      - LEEFORGE_DATABASE_NAME=leeforge_examples
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - redis-network
+      - pgsql_network
+
+networks:
+  redis-network:
+    external: true
+  pgsql_network:
+    external: true

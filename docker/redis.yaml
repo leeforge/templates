@@ -1,0 +1,17 @@
+services:
+  redis7:
+    container_name: leeforge-redis-7
+    build: ./redis
+    env_file:
+      - ./env/.env
+      - ./env/redis.env
+    ports:
+      - 16379:6379
+    networks:
+      - leeforge-network
+    # restart: unless-stopped
+
+networks:
+  leeforge-network:
+    name: leeforge-network
+    external: true

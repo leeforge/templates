@@ -1,0 +1,12 @@
+log:
+  director: "logs"
+  level: "info"
+  format: "console"
+  log-in-terminal: true
+  show-line-number: true
+  max-age: 7
+  max-size: 100
+  max-backups: 10
+  compress: true
+  time-format: "2006/01/02 - 15:04:05"
+  encode-level: "LowercaseColorLevelEncoder"

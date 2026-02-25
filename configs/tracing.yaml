@@ -1,0 +1,3 @@
+tracing:
+  enabled: false
+  endpoint: "localhost:4317"

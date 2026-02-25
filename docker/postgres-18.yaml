@@ -1,0 +1,16 @@
+services:
+  postgres-18:
+    container_name: leeforge-postgres-18
+    image: postgres:18
+    env_file:
+      - ./env/.env
+      - ./env/db.env
+    ports:
+      - 15436:5432
+    networks:
+      - leeforge-network
+    # restart: unless-stopped
+
+networks:
+  leeforge-network:
+    name: leeforge-network

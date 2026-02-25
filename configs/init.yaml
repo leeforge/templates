@@ -1,0 +1,2 @@
+init:
+  secret_key: "leeforge-init-secret-key"

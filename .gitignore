@@ -1,0 +1,53 @@
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+
+# Coverage & profiling
+*.out
+coverage.*
+*.prof
+*.pprof
+
+# Cache/temp
+tmp/
+.cache/
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+uploads/
+
+# Swagger (generated)
+docs/swagger.json
+docs/swagger.yaml
+
+# Example binary (make build)
+leeforge-example-service
+
+# Local env
+#.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Go workspace/vendor
+vendor/
+go.work
+
+# IDE/OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
