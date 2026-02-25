@@ -1,5 +1,5 @@
 security:
-  jwt_secret: "your-secret-key-change-in-production"
+  jwt_secret: "<jwt-secret>"
   token_expiry: 24
   refresh_expiry: 72
   password_cost: 12

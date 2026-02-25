@@ -72,6 +72,21 @@ make swagger       # Swagger documentation generation
 go test ./...
 ```
 
+## Configuration
+
+Before running, replace all `<placeholder>` values in the configuration files:
+
+| Placeholder | File(s) | Description |
+|---|---|---|
+| `<db-username>` | `configs/database.yaml`, `docker/env/db.env` | PostgreSQL username |
+| `<db-password>` | `configs/database.yaml`, `docker/env/db.env` | PostgreSQL password |
+| `<redis-password>` | `configs/cache.yaml`, `docker/env/redis.env` | Redis password |
+| `<jwt-secret>` | `configs/security.yaml` | JWT signing secret |
+| `<init-secret-key>` | `configs/init.yaml` | Application init secret key |
+| `<registry-host>` | `docker/docker-compose.test.yaml`, `.deploy.env.common`, `.deploy.env.prod` | Docker registry host |
+| `<remote-user>` | `.deploy.env.common`, `.deploy.env.prod` | SSH remote deploy user |
+| `<remote-host>` | `.deploy.env.common`, `.deploy.env.prod` | SSH remote deploy host |
+
 ## Deployment
 
 ```bash

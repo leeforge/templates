@@ -1,6 +1,6 @@
 services:
   leeforge-examples:
-    image: 192.168.31.88:5000/leeforge-examples:latest
+    image: <registry-host>/leeforge-examples:latest
     container_name: leeforge-examples
     restart: unless-stopped
     ports:

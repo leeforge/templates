@@ -1,2 +1,2 @@
 init:
-  secret_key: "leeforge-init-secret-key"
+  secret_key: "<init-secret-key>"
