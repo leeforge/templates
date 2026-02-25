@@ -249,8 +249,8 @@ func Default() *Config {
 		Database: &DatabaseConfig{
 			Host:         "localhost",
 			Port:         "15436",
-			Username:     "jsonlee",
-			Password:     "123456",
+			Username:     "",
+			Password:     "",
 			Name:         "postgres",
 			SSLMode:      "disable",
 			AutoMigrate:  true,
@@ -260,7 +260,7 @@ func Default() *Config {
 		Cache: &CacheConfig{
 			Host:     "127.0.0.1",
 			Port:     "16379",
-			Password: "123456",
+			Password: "",
 			DB:       0,
 		},
 		Log: &LogConfig{
@@ -284,7 +284,7 @@ func Default() *Config {
 			Port: "9090",
 		},
 		Security: &SecurityConfig{
-			JWTSecret:       "your-secret-key-change-in-production",
+			JWTSecret:       "",
 			TokenExpiry:     24,
 			RefreshExpiry:   72,
 			PasswordCost:    12,
@@ -311,7 +311,7 @@ func Default() *Config {
 			OU:     FeatureToggle{Enabled: true},
 		},
 		Init: &InitConfig{
-			SecretKey: "leeforge-init-secret-key",
+			SecretKey: "",
 		},
 		Frontend: &FrontendConfig{
 			URL: "http://localhost:3000",
