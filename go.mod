@@ -27,8 +27,8 @@ require (
 	github.com/bmatcuk/doublestar/v4 v4.10.0 // indirect
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
-	github.com/casbin/casbin/v2 v2.135.0 // indirect
-	github.com/casbin/govaluate v1.10.0 // indirect
+	github.com/casbin/casbin/v2 v2.85.0 // indirect
+	github.com/casbin/govaluate v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
