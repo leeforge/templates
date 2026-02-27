@@ -1,14 +1,16 @@
 package post
 
 import (
+	"fmt"
 	"strings"
 
 	"entgo.io/ent/dialect"
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/zap"
 
-	corecore "github.com/leeforge/core/core"
-	"github.com/leeforge/framework/logging"
+	"github.com/leeforge/core/core"
+	coreconfig "github.com/leeforge/core/server/config"
+	frameLogging "github.com/leeforge/framework/logging"
 
 	examplesent "leeforge-example-service/ent"
 )
@@ -33,9 +35,9 @@ func (m *PostModule) RegisterPrivateRoutes(router chi.Router) {
 	})
 }
 
-// NewPostModule is a corecore.ModuleFactory that creates a PostModule.
+// NewPostModule is a core.ModuleFactory that creates a PostModule.
 // It creates its own ent client from the database config for examples-owned schemas.
-func NewPostModule(logger logging.Logger, deps *corecore.Dependencies) corecore.Module {
+func NewPostModule(logger frameLogging.Logger, deps *core.Dependencies) core.Module {
 	dsn := deps.Config.Database.DSN()
 	driver := resolveDriver(dsn)
 
@@ -47,6 +49,35 @@ func NewPostModule(logger logging.Logger, deps *corecore.Dependencies) corecore.
 
 	svc := NewService(client)
 	return &PostModule{handler: NewHandler(svc, logger)}
+}
+
+// NewPostModuleBootstrapper creates a ModuleBootstrapper for the post module.
+func NewPostModuleBootstrapper(router chi.Router, cfg any, logger *zap.Logger) error {
+	// Extract config from the cfg map
+	runtimeCfg, ok := cfg.(map[string]any)
+	if !ok {
+		return fmt.Errorf("invalid config type")
+	}
+
+	config, ok := runtimeCfg["config"].(*coreconfig.Config)
+	if !ok {
+		return fmt.Errorf("config not found in runtime config")
+	}
+
+	dsn := config.Database.DSN()
+	driver := resolveDriver(dsn)
+
+	client, err := examplesent.Open(driver, dsn)
+	if err != nil {
+		logger.Error("failed to create examples ent client", zap.Error(err))
+		return err
+	}
+
+	svc := NewService(client)
+	module := &PostModule{handler: NewHandler(svc, frameLogging.NewLogger(config.Log.ToLoggingConfig()))}
+	module.RegisterPrivateRoutes(router)
+
+	return nil
 }
 
 func resolveDriver(dsn string) string {
@@ -63,4 +94,4 @@ func resolveDriver(dsn string) string {
 	}
 }
 
-var _ corecore.Module = (*PostModule)(nil)
+var _ core.Module = (*PostModule)(nil)

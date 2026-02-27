@@ -10,7 +10,7 @@ import (
 	"go.uber.org/zap"
 
 	core "github.com/leeforge/core"
-	corecore "github.com/leeforge/core/core"
+	"github.com/leeforge/core/host"
 	postmodule "leeforge-example-service/modules/post"
 )
 
@@ -22,9 +22,11 @@ type App struct {
 
 func NewApp() (*App, error) {
 	return newApp(zap.NewNop(), core.RuntimeOptions{
-		ConfigPath:           resolveConfigPath(),
-		PluginRegistrar:      registerExamplePlugins,
-		ExtraModuleFactories: []corecore.ModuleFactory{postmodule.NewPostModule},
+		ConfigPath:      resolveConfigPath(),
+		PluginRegistrar: registerExamplePlugins,
+		Modules: []host.ModuleBootstrapper{
+			postmodule.NewPostModuleBootstrapper,
+		},
 	})
 }
 
