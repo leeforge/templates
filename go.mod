@@ -9,8 +9,8 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/leeforge/core v0.1.3
 	github.com/leeforge/framework v0.2.0
-	github.com/leeforge/plugins/ou v0.0.0-20260224135850-77e2b9046ba0
-	github.com/leeforge/plugins/tenant v0.0.0-20260224135850-77e2b9046ba0
+	github.com/leeforge/plugins/ou v0.2.2
+	github.com/leeforge/plugins/tenant v0.2.2
 	github.com/stretchr/testify v1.11.1
 	github.com/swaggo/swag v1.16.6
 	go.uber.org/zap v1.27.1
