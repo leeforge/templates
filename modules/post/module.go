@@ -1,7 +1,6 @@
 package post
 
 import (
-	"fmt"
 	"strings"
 
 	"entgo.io/ent/dialect"
@@ -9,7 +8,6 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/leeforge/core/core"
-	coreconfig "github.com/leeforge/core/server/config"
 	frameLogging "github.com/leeforge/framework/logging"
 
 	examplesent "leeforge-example-service/ent"
@@ -49,35 +47,6 @@ func NewPostModule(logger frameLogging.Logger, deps *core.Dependencies) core.Mod
 
 	svc := NewService(client)
 	return &PostModule{handler: NewHandler(svc, logger)}
-}
-
-// NewPostModuleBootstrapper creates a ModuleBootstrapper for the post module.
-func NewPostModuleBootstrapper(router chi.Router, cfg any, logger *zap.Logger) error {
-	// Extract config from the cfg map
-	runtimeCfg, ok := cfg.(map[string]any)
-	if !ok {
-		return fmt.Errorf("invalid config type")
-	}
-
-	config, ok := runtimeCfg["config"].(*coreconfig.Config)
-	if !ok {
-		return fmt.Errorf("config not found in runtime config")
-	}
-
-	dsn := config.Database.DSN()
-	driver := resolveDriver(dsn)
-
-	client, err := examplesent.Open(driver, dsn)
-	if err != nil {
-		logger.Error("failed to create examples ent client", zap.Error(err))
-		return err
-	}
-
-	svc := NewService(client)
-	module := &PostModule{handler: NewHandler(svc, frameLogging.NewLogger(config.Log.ToLoggingConfig()))}
-	module.RegisterPrivateRoutes(router)
-
-	return nil
 }
 
 func resolveDriver(dsn string) string {
